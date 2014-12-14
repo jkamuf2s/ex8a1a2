@@ -31,6 +31,16 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    
+    
     public String getLastName() {
         return lastName;
     }

@@ -1,7 +1,10 @@
 package ooka.jkjh.controller;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import ooka.jkjh.dao.UserDaoLocal;
+import ooka.jkjh.entities.User;
 
 /**
  *
@@ -11,11 +14,16 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class UserController {
 
+    private User user;
+
     private String lastName;
     private String firstName;
     private String emailAddress;
     private String password;
     private String userRole;
+
+    @EJB
+    private UserDaoLocal userDao;
 
     public String getUserRole() {
         return userRole;
@@ -59,6 +67,13 @@ public class UserController {
 
     public String signIn() {
 
+        user = this.userDao.getUserByEmailAddress(emailAddress);
+        lastName = user.getLastName();
+        firstName = user.getFirstName();
+        emailAddress = user.getEmailAddress();
+        password = user.getPassword();
+        userRole = user.getRole();
+
         return Pages.USER_ACTION_OVERVIEW;
 
     }
@@ -69,6 +84,10 @@ public class UserController {
     }
 
     public String createNewUser() {
+
+        user = new User(lastName, firstName, emailAddress, password, userRole);
+
+        this.userDao.addNewUser(user);
 
         return Pages.USER_ACTION_OVERVIEW;
 
