@@ -9,9 +9,14 @@
         <h3> Login to the Conference System </h3>
         <h:form acceptcharset="ISO-8859-1">
             <h:outputLabel value="Enter Email Address:"> </h:outputLabel>
-            <h:inputText value="#{userController.emailAddress}"></h:inputText>
+            <h:inputText size="30" value="#{userController.emailAddress}"></h:inputText>
             <p></p>
             <h:commandButton value="Sign In" action="#{userController.signIn()}"></h:commandButton>
+        </h:form>
+
+        <h3> Create an Account </h3>
+        <h:form acceptcharset="ISO-8859-1">
+            <h:commandButton value="Sign Up" action="#{userController.signUp()}"></h:commandButton>
         </h:form>
 
     </h:body>

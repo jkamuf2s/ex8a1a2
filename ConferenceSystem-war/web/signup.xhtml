@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Sign Up</title>
+    </h:head>
+    <h:body>
+        <h3> Create an new account </h3>
+        <h:form acceptcharset="ISO-8859-1">
+            <h:outputLabel value="Enter Email Address: "> </h:outputLabel>
+            <h:inputText value="#{userController.emailAddress}"></h:inputText><br/>
+            <h:outputLabel value="Enter First Name: "> </h:outputLabel>
+            <h:inputText value="#{userController.firstName}"></h:inputText><br/>
+            <h:outputLabel value="Enter Fast Name: "> </h:outputLabel>
+            <h:inputText value="#{userController.lastName}"></h:inputText><br/>
+            <h:outputLabel value="Choose Password: "> </h:outputLabel>
+            <h:inputSecret  value="#{userController.password}"></h:inputSecret ><br/>
+            <h:outputLabel value="Choose your Role: "> </h:outputLabel>
+            <h:selectOneMenu id="userRole" value="#{userController.userRole}">
+                <f:selectItem id="item1" itemLabel="Participant" itemValue="Participant" />
+                <f:selectItem id="item2" itemLabel="Reviewer" itemValue="Reviewer" />
+                <f:selectItem id="item3" itemLabel="Author" itemValue="Author" />
+                <f:selectItem id="item4" itemLabel="Host" itemValue="Host" />
+            </h:selectOneMenu>
+            <p></p>
+            <h:commandButton value="Sign Up" action="#{userController.createNewUser()}"></h:commandButton>
+        </h:form>
+    </h:body>
+</html>
+

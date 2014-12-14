@@ -12,6 +12,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class User implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,21 +21,15 @@ public class User implements Serializable {
     private String firstName;
     private String emailAddress;
     private String password;
-    private UserRole role;
+    private String role;
 
-    public User(String lastName, String firstName, String emailAddress, String password, UserRole role) {
+    public User(String lastName, String firstName, String emailAddress, String password, String role) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.emailAddress = emailAddress;
         this.password = password;
         this.role = role;
     }
-
-    public User(UserRole role) {
-        this.role = role;
-    }
-    
-    
 
     public String getLastName() {
         return lastName;
@@ -67,8 +62,6 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -102,5 +95,5 @@ public class User implements Serializable {
     public String toString() {
         return "ooka.jkjh.entities.User[ id=" + id + " ]";
     }
-    
+
 }
