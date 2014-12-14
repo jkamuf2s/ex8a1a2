@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ooka.jkjh.controller;
-
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
@@ -17,8 +11,22 @@ import javax.inject.Named;
 @ApplicationScoped
 public class UserController {
     
-        public String getMessage() {
-        return "Hello World!";
+    private String emailAddress;
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
     
+    
+
+    public String signIn() {
+        
+        return Pages.USER_ACTION_OVERVIEW;
+
+    }
+
 }
