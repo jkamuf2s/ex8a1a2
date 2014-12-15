@@ -21,10 +21,21 @@ public class UserController {
     private String emailAddress;
     private String password;
     private String userRole;
+    private int id;
 
     @EJB
     private UserDaoLocal userDao;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
+    
     public String getUserRole() {
         return userRole;
     }
@@ -87,7 +98,7 @@ public class UserController {
 
         user = new User(lastName, firstName, emailAddress, password, userRole);
 
-        this.userDao.addNewUser(user);
+        this.id = this.userDao.addNewUser(user);
 
         return Pages.USER_ACTION_OVERVIEW;
 

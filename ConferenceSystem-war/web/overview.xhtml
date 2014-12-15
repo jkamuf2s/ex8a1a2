@@ -7,11 +7,21 @@
     </h:head>
     <h:body>
         <h4>
-        Hello <h:outputLabel value="#{userController.firstName}"> </h:outputLabel>
-        <h:outputLabel value=" #{userController.lastName}"> </h:outputLabel>!
-        Your are logged in with the role: 
-        <h:outputLabel value=" #{userController.userRole}"> </h:outputLabel>
+            Hello <h:outputLabel value="#{userController.firstName}"> </h:outputLabel>
+            <h:outputLabel value=" #{userController.lastName}"> </h:outputLabel>!
+            Your are logged in with the role: 
+            <h:outputLabel value=" #{userController.userRole}"> </h:outputLabel>
         </h4>
+        With your role, your are capable of the following actions:
+        <h:form>
+            <h:commandLink value="Create a new Conference" action="#{conferenceController.doIndex()}" rendered="#{userController.userRole == 'Host'}"/>
+        </h:form>
+
+
+        <p></p>
+        <h:form>
+            <h:commandLink value="Back to the index page" action="#{conferenceController.doIndex()}" />
+        </h:form>
     </h:body>
 </html>
 
