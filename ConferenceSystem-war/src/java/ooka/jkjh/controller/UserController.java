@@ -103,5 +103,10 @@ public class UserController {
         return Pages.USER_ACTION_OVERVIEW;
 
     }
+    
+    public String signOut(){
+        user = null;
+        return Pages.INDEX_PAGE;
+    }
 
 }
