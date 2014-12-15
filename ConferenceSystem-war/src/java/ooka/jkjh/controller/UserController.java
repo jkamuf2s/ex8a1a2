@@ -14,7 +14,7 @@ import ooka.jkjh.entities.User;
 @SessionScoped
 public class UserController {
 
-    private User user;
+    public static User user;
 
     private String lastName;
     private String firstName;

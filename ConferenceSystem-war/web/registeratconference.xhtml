@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Register at a Conference</title>
+    </h:head>
+    <h:body>
+        <h3> Register at a Conference as a Participant </h3>
+        <h4>You can register at the following Conferences</h4>
+
+        <h:form>
+
+            <p:dataTable value="#{conferenceController.openConferences}" var="item" >
+
+                <p:column>
+
+                    <f:facet name="header">
+
+                        <h:outputText value="Name" />
+
+                    </f:facet>
+
+                    <h:outputText value="#{item.name}"/>
+
+                </p:column>
+
+                <p:column>
+
+                    <f:facet name="header">
+
+                        <h:outputText value="Id" />
+
+                    </f:facet>
+
+                    <h:outputText value="#{item.id}"/>
+
+                </p:column>
+
+
+                <p:column>
+
+                    <f:facet name="header">
+
+                        <h:outputText value="Action" />
+
+                    </f:facet>
+
+                    <h:commandLink value="Register" action ="#{conferenceController.registerUserAtConference(item)}"></h:commandLink>
+
+                </p:column>
+
+
+            </p:dataTable>
+
+            <br/>
+            <h:commandLink value="Back to the overview page" action="#{conferenceController.doOverview()}" />
+
+        </h:form>
+    </h:body>
+</html>
+

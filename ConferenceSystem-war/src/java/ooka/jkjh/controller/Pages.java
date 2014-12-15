@@ -10,5 +10,6 @@ public class Pages {
     public static final String SIGN_UP_PAGE = "signup";
     public static final String USER_ACTION_OVERVIEW = "overview";
     public static final String CREATE_CONFERENCE = "createconference";
+    public static final String REGISTER_AT_CONFERENCE = "registeratconference";
 
 }
