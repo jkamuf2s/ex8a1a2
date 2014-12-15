@@ -9,11 +9,12 @@
     </h:head>
     <h:body>
         <h3> Register at a Conference as a Participant </h3>
-        <h4>You can register at the following Conferences</h4>
+        <h4>You can register at the following Conferences:</h4><br/>
+        <h:outputLabel value="No Conferences to register for you so far!" rendered="#{empty conferenceController.showConferencesWhereParticipantNotRegistered()}"> </h:outputLabel>
 
         <h:form>
 
-            <p:dataTable value="#{conferenceController.getOpenConferences()}" var="item" >
+            <p:dataTable value="#{conferenceController.showConferencesWhereParticipantNotRegistered()}" var="item" rendered="#{ not empty conferenceController.showConferencesWhereParticipantNotRegistered()}">
 
                 <p:column>
 

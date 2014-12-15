@@ -102,4 +102,23 @@ public class ConferenceDao implements ConferenceDaoLocal {
         return createdConferences;
     }
 
+    @Override
+    public List<Conference> getConferencesWhereParticipantNotRegistered(User user) {
+
+        Iterator it = conferences.entrySet().iterator();
+        List<Conference> notParticipatedConferences = new LinkedList();
+        while (it.hasNext()) {
+
+            HashMap.Entry pairs = (HashMap.Entry) it.next();
+            Conference tmp = (Conference) pairs.getValue();
+
+            if (!tmp.getParticipantIds().contains(user.getId())) {
+                notParticipatedConferences.add(tmp);
+            }
+        }
+
+        return notParticipatedConferences;
+
+    }
+
 }

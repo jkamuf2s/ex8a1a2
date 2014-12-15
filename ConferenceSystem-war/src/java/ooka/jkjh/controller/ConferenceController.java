@@ -78,4 +78,10 @@ public class ConferenceController {
 
     }
 
+    public List<Conference> showConferencesWhereParticipantNotRegistered() {
+
+        return conferenceDao.getConferencesWhereParticipantNotRegistered(UserController.user);
+
+    }
+
 }
