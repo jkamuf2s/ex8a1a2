@@ -20,8 +20,9 @@
             <h:commandLink value="Register at a Conference" action="#{conferenceController.doRegisterAtConference()}" rendered="#{userController.userRole == 'Participant'}"/>
         </h:form>
         <p></p>
-        <h:outputLabel value="You are currently registered for the following Conferences:" rendered="#{userController.userRole == 'Participant'}"> </h:outputLabel>
-        <p:dataTable value="#{conferenceController.showRegisteredConferencesOfUser()}" rendered="#{userController.userRole == 'Participant'}" var="item" >
+        <h:outputLabel value="You are currently registered for the following Conferences:" rendered="#{userController.userRole == 'Participant'}"> </h:outputLabel><br/>
+        <h:outputLabel value="Not registered at any Conferences so far!" rendered="#{userController.userRole == 'Participant' and empty conferenceController.showRegisteredConferencesOfUser()}"> </h:outputLabel>
+        <p:dataTable value="#{conferenceController.showRegisteredConferencesOfUser()}" rendered="#{userController.userRole == 'Participant' and not empty conferenceController.showRegisteredConferencesOfUser()}" var="item" >
 
             <p:column>
 
@@ -48,8 +49,9 @@
             </p:column>
 
         </p:dataTable>
-        <h:outputLabel value="You are currently the Host of the following Conferences:" rendered="#{userController.userRole == 'Host'}"> </h:outputLabel>
-        <p:dataTable value="#{conferenceController.showCreatedConferencesOfUser()}" rendered="#{userController.userRole == 'Host'}" var="item" >
+        <h:outputLabel value="You are currently the Host of the following Conferences:" rendered="#{userController.userRole == 'Host'}"> </h:outputLabel><br/>
+        <h:outputLabel value="Not the Host of any Conferences so far!" rendered="#{userController.userRole == 'Host' and empty conferenceController.showCreatedConferencesOfUser()}"> </h:outputLabel>
+        <p:dataTable value="#{conferenceController.showCreatedConferencesOfUser()}" rendered="#{userController.userRole == 'Host' and not empty conferenceController.showCreatedConferencesOfUser()}" var="item" >
 
             <p:column>
 
