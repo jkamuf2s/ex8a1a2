@@ -14,16 +14,12 @@ import ooka.jkjh.entities.Conference;
 @ManagedBean
 @SessionScoped
 public class ConferenceController {
-    
+
     private String conferenceName;
     private Conference conferenceToCreate;
-    private List<Conference> openConferences;
-    
-    
+
     @EJB
     private ConferenceDaoLocal conferenceDao;
-    
-    
 
     public String getConferenceName() {
         return conferenceName;
@@ -34,60 +30,52 @@ public class ConferenceController {
     }
 
     public List<Conference> getOpenConferences() {
-        return openConferences;
+        return conferenceDao.getAllOpenConferences();
     }
 
-
-    
-    
-    
-    
-    public String doIndex(){
+    public String doIndex() {
         return Pages.INDEX_PAGE;
     }
-    
-        public String doOverview(){
+
+    public String doOverview() {
         return Pages.USER_ACTION_OVERVIEW;
     }
-    
-    public String doCreateNewConference(){
-        
+
+    public String doCreateNewConference() {
+
         return Pages.CREATE_CONFERENCE;
     }
-    
-        public String doRegisterAtConference(){
-        
+
+    public String doRegisterAtConference() {
+
         return Pages.REGISTER_AT_CONFERENCE;
     }
-    
-    public String createNewConference(){
-        
+
+    public String createNewConference() {
+
         conferenceToCreate = new Conference();
         conferenceToCreate.setName(conferenceName);
         conferenceDao.addConference(conferenceToCreate, UserController.user);
-        openConferences = conferenceDao.getAllOpenConferences();
-        
+
         return Pages.USER_ACTION_OVERVIEW;
     }
-    
-    public String registerUserAtConference(Conference conferenceToRegister){
-        
+
+    public String registerUserAtConference(Conference conferenceToRegister) {
+
         conferenceDao.addParticipantToConference(UserController.user, conferenceToRegister.getId().intValue());
         return Pages.USER_ACTION_OVERVIEW;
     }
-    
-    public List<Conference> showRegisteredConferencesOfUser(){
-        
+
+    public List<Conference> showRegisteredConferencesOfUser() {
+
         return conferenceDao.getConferencesAttendedByUser(UserController.user);
-        
-        
+
     }
-    
-        public List<Conference> showCreatedConferencesOfUser(){
-        
+
+    public List<Conference> showCreatedConferencesOfUser() {
+
         return conferenceDao.getConferencesCreatedByUser(UserController.user);
-        
-        
+
     }
-    
+
 }
