@@ -20,7 +20,8 @@ public class RatingController {
 
     private boolean conferencesToRateAvaliabe = true;
     private User loggedInUser;
-
+  private int ratingValue;
+  
     public boolean isConferencesToRateAvaliabe() {
         return conferencesToRateAvaliabe;
     }
@@ -30,6 +31,17 @@ public class RatingController {
     @EJB
     private ConferenceDaoLocal confernceDao;
 
+    public int getRatingValue() {
+        return ratingValue;
+    }
+
+    public void setRatingValue(int ratingValue) {
+        this.ratingValue = ratingValue;
+    }
+
+    
+    
+    
     public void doSetCurrentUser(User user) {
         this.loggedInUser = user;
     }
@@ -38,7 +50,8 @@ public class RatingController {
         return Pages.RATE_A_CONFERENCE;
     }
 
-    public String doRatingOfAconference() {
+    public String doRatingOfAconference(Long conferenceID) {
+        ratingDao.rateClosedConference(loggedInUser.getId(), conferenceID, ratingValue);
         return Pages.USER_ACTION_OVERVIEW;
     }
 

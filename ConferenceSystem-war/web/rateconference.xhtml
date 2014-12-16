@@ -41,8 +41,24 @@
 
                 </p:column>
 
+                <p:column>
 
- 
+                    <f:facet name="header">
+
+                        <h:outputText value="Rate the Conference" />
+
+                    </f:facet>
+
+                    <h:form>
+                        <h:outputLabel value="Rate from 1 - 10 ( 1 = bad ; 10 = very good ) : "> </h:outputLabel>
+                        <h:inputText value="#{ratingController.ratingValue}"></h:inputText>
+                        <h:commandButton value="Rate" action="#{ratingController.doRatingOfAconference(conference.id)}" ></h:commandButton><br/>
+                    </h:form>
+
+                </p:column>
+
+
+
 
 
             </p:dataTable>

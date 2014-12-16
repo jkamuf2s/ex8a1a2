@@ -23,7 +23,7 @@ public class ConferenceRating implements Serializable {
     private List<Long> userIdsWhoSubmittedRating = new ArrayList<>();
     private Long conferenceId;
     private Long userId;
-    private Integer ratingValue = null;
+    private Integer ratingValue = 0;
 
     public ConferenceRating(Long conferenceId, Long userId) {
         this.conferenceId = conferenceId;
