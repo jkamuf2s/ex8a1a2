@@ -141,7 +141,7 @@ public class ConferenceDao implements ConferenceDaoLocal {
     }
 
     @Override
-    public List<User> getParticipantsOfOpenConference(Long conferenceID) {
+    public List<User> getParticipantsOfConference(Long conferenceID) {
         Iterator it = conferences.entrySet().iterator();
 
         while (it.hasNext()) {
@@ -149,7 +149,7 @@ public class ConferenceDao implements ConferenceDaoLocal {
             HashMap.Entry pairs = (HashMap.Entry) it.next();
             Conference tmp = (Conference) pairs.getValue();
 
-            if (tmp.isCompleted() == false && tmp.getId().equals(conferenceID)) {
+            if (tmp.getId().equals(conferenceID)) {
 
                 return userDao.getUserListById(tmp.getParticipantIds());
             }
