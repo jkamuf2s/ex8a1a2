@@ -20,15 +20,18 @@ public class ConferenceController {
     private Conference conferenceToCreate;
     private Long conferenceId;
     private boolean conferenceIsOpenAndDoesExist = false;
+    private User loggedInUser;
 
     @EJB
     private ConferenceDaoLocal conferenceDao;
 
+    public void doSetCurrentUser(User user) {
+        this.loggedInUser = user;
+    }
+
     public boolean isConferenceIsOpenAndDoesExist() {
         return conferenceIsOpenAndDoesExist;
     }
-    
-    
 
     public void setConferenceId(Long conferenceId) {
         this.conferenceId = conferenceId;
@@ -68,7 +71,7 @@ public class ConferenceController {
 
         conferenceToCreate = new Conference();
         conferenceToCreate.setName(conferenceName);
-        if (-1 == conferenceDao.addConference(conferenceToCreate, UserController.user)) {
+        if (-1 == conferenceDao.addConference(conferenceToCreate, loggedInUser)) {
             return conferenceWithThatNameAlreadyOpen();
         } else {
             conferenceIsOpenAndDoesExist = false;
@@ -79,25 +82,25 @@ public class ConferenceController {
 
     public String registerUserAtConference(Conference conferenceToRegister) {
 
-        conferenceDao.addParticipantToConference(UserController.user, conferenceToRegister.getId().intValue());
+        conferenceDao.addParticipantToConference(loggedInUser, conferenceToRegister.getId().intValue());
         return Pages.USER_ACTION_OVERVIEW;
     }
 
     public List<Conference> showRegisteredConferencesOfUser() {
 
-        return conferenceDao.getConferencesAttendedByUser(UserController.user);
+        return conferenceDao.getConferencesAttendedByUser(loggedInUser);
 
     }
 
     public List<Conference> showCreatedConferencesOfUser() {
 
-        return conferenceDao.getConferencesCreatedByUser(UserController.user);
+        return conferenceDao.getConferencesCreatedByUser(loggedInUser);
 
     }
 
     public List<Conference> showConferencesWhereParticipantNotRegistered() {
 
-        return conferenceDao.getConferencesWhereParticipantNotRegistered(UserController.user);
+        return conferenceDao.getConferencesWhereParticipantNotRegistered(loggedInUser);
 
     }
 
@@ -108,11 +111,11 @@ public class ConferenceController {
     }
 
     public String conferenceWithThatNameAlreadyOpen() {
-        conferenceIsOpenAndDoesExist =true;
+        conferenceIsOpenAndDoesExist = true;
         return Pages.CREATE_CONFERENCE;
     }
-    
-    public String closeOpenConference(Long conferenceID){
+
+    public String closeOpenConference(Long conferenceID) {
         conferenceDao.closeCOnference(conferenceID);
         return Pages.USER_ACTION_OVERVIEW;
     }

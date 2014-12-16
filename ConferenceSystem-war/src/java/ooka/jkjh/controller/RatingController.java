@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 import ooka.jkjh.dao.ConferenceDaoLocal;
 import ooka.jkjh.dao.RatingDaoLocal;
 import ooka.jkjh.entities.Conference;
+import ooka.jkjh.entities.User;
 
 /**
  *
@@ -16,36 +17,32 @@ import ooka.jkjh.entities.Conference;
 @ManagedBean
 @SessionScoped
 public class RatingController {
-    
+
     private boolean conferencesToRateAvaliabe = true;
+    private User loggedInUser;
 
     public boolean isConferencesToRateAvaliabe() {
         return conferencesToRateAvaliabe;
     }
-    
-    
-    
-    
+
     @EJB
     private RatingDaoLocal ratingDao;
     @EJB
     private ConferenceDaoLocal confernceDao;
-    
-    
-    public String doGetRateConference(){
+
+    public String doGetRateConference() {
         return Pages.RATE_A_CONFERENCE;
     }
-    
-    public String doRatingOfAconference(){
+
+    public String doRatingOfAconference() {
         return Pages.USER_ACTION_OVERVIEW;
     }
-    
-    public List<Conference> renderAllClosedAndNotRatedByUserConferences(){
-        
+
+    public List<Conference> renderAllClosedAndNotRatedByUserConferences() {
+
         conferencesToRateAvaliabe = true;
-        return confernceDao.getAllConferencesWhichUserCanRate(UserController.user);
-        
-        
+        return confernceDao.getAllConferencesWhichUserCanRate(loggedInUser);
+
     }
-    
+
 }

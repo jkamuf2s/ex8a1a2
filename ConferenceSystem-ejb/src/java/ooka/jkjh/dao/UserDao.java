@@ -75,6 +75,7 @@ public class UserDao implements UserDaoLocal {
         return null;
     }
 
+    @Override
     public List<User> getUserListById(List<Long> userIDs) {
 
         List<User> resultUsers = new ArrayList<>();

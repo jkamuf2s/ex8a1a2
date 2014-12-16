@@ -14,7 +14,7 @@ import ooka.jkjh.entities.User;
 @SessionScoped
 public class UserController {
 
-    public static User user;
+    private User user;
 
     private String lastName;
     private String firstName;
@@ -35,8 +35,10 @@ public class UserController {
     public boolean isEmailAdressAlreadyTaken() {
         return emailAdressAlreadyTaken;
     }
-    
-    
+
+    public User getUser() {
+        return user;
+    }
 
     public int getId() {
         return id;
