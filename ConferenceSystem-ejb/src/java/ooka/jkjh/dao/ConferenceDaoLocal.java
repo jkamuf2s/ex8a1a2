@@ -23,7 +23,7 @@ public interface ConferenceDaoLocal {
     
     List<Conference> getConferencesCreatedByUser(User user);
     
-    List<Conference> getConferencesWhereParticipantNotRegistered(User user);
+    List<Conference> getConferencesWhereParticipantNotRegisteredAndOpen(User user);
     
     List<User> getParticipantsOfConference(Long conferenceID);
     

@@ -98,9 +98,9 @@ public class ConferenceController {
 
     }
 
-    public List<Conference> showConferencesWhereParticipantNotRegistered() {
+    public List<Conference> showConferencesWhereParticipantNotRegisteredAndOpen() {
 
-        return conferenceDao.getConferencesWhereParticipantNotRegistered(loggedInUser);
+        return conferenceDao.getConferencesWhereParticipantNotRegisteredAndOpen(loggedInUser);
 
     }
 

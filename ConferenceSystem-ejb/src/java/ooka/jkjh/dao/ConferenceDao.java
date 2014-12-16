@@ -122,7 +122,7 @@ public class ConferenceDao implements ConferenceDaoLocal {
     }
 
     @Override
-    public List<Conference> getConferencesWhereParticipantNotRegistered(User user) {
+    public List<Conference> getConferencesWhereParticipantNotRegisteredAndOpen(User user) {
 
         Iterator it = conferences.entrySet().iterator();
         List<Conference> notParticipatedConferences = new LinkedList();
@@ -131,7 +131,7 @@ public class ConferenceDao implements ConferenceDaoLocal {
             HashMap.Entry pairs = (HashMap.Entry) it.next();
             Conference tmp = (Conference) pairs.getValue();
 
-            if (!tmp.getParticipantIds().contains(user.getId())) {
+            if (!tmp.getParticipantIds().contains(user.getId()) && !tmp.isCompleted()) {
                 notParticipatedConferences.add(tmp);
             }
         }
