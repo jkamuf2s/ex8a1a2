@@ -4,6 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Create Conference</title>
+        <h:outputStylesheet library="css" name="conferenceSystem.css"  />
     </h:head>
     <h:body>
        <h3> Create a new Conference </h3>
@@ -12,7 +13,8 @@
             <h:inputText value="#{conferenceController.conferenceName}"></h:inputText>
  
             <p></p>
-            <h:commandButton value="Create the Conference" action="#{conferenceController.createNewConference()}"></h:commandButton>
+            <h:commandButton value="Create the Conference" action="#{conferenceController.createNewConference()}"></h:commandButton><br/>
+            <h:outputLabel class="errorMessage" value="Open Conference with that Name does already exist!" rendered="#{conferenceController.conferenceIsOpenAndDoesExist == true}"> </h:outputLabel><br/>
         </h:form>
 
         <p></p>

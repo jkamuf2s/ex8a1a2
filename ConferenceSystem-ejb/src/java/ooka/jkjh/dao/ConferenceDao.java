@@ -1,9 +1,11 @@
 package ooka.jkjh.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import ooka.jkjh.entities.Conference;
 import ooka.jkjh.entities.User;
@@ -17,9 +19,25 @@ public class ConferenceDao implements ConferenceDaoLocal {
 
     private static HashMap conferences = new HashMap<Integer, Conference>();
     private static int id = 0;
+    @EJB
+    private UserDaoLocal userDao;
 
     @Override
     public int addConference(Conference conference, User hostUser) {
+
+        Iterator it = conferences.entrySet().iterator();
+
+        while (it.hasNext()) {
+
+            HashMap.Entry pairs = (HashMap.Entry) it.next();
+            Conference tmp = (Conference) pairs.getValue();
+
+            if (tmp.isCompleted() == false && tmp.getName().equals(conference.getName())) {
+
+                return -1;
+            }
+        }
+
         conference.setId(Long.valueOf(id));
         conference.setHostId(hostUser.getId());
         conferences.put(id, conference);
@@ -27,6 +45,7 @@ public class ConferenceDao implements ConferenceDaoLocal {
         id++;
 
         return id - 1;
+
     }
 
     @Override
@@ -118,6 +137,25 @@ public class ConferenceDao implements ConferenceDaoLocal {
         }
 
         return notParticipatedConferences;
+
+    }
+
+    @Override
+    public List<User> getParticipantsOfOpenConference(Long conferenceID) {
+        Iterator it = conferences.entrySet().iterator();
+
+        while (it.hasNext()) {
+
+            HashMap.Entry pairs = (HashMap.Entry) it.next();
+            Conference tmp = (Conference) pairs.getValue();
+
+            if (tmp.isCompleted() == false && tmp.getId().equals(conferenceID)) {
+
+                return userDao.getUserListById(tmp.getParticipantIds());
+            }
+        }
+
+        return new ArrayList();
 
     }
 

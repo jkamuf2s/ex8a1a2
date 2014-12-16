@@ -1,7 +1,9 @@
 package ooka.jkjh.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import javax.ejb.Stateless;
 import ooka.jkjh.entities.User;
 
@@ -71,6 +73,24 @@ public class UserDao implements UserDaoLocal {
         }
 
         return null;
+    }
+
+    public List<User> getUserListById(List<Long> userIDs) {
+
+        List<User> resultUsers = new ArrayList<>();
+        Iterator it = users.entrySet().iterator();
+        while (it.hasNext()) {
+
+            HashMap.Entry pairs = (HashMap.Entry) it.next();
+            User tmp = (User) pairs.getValue();
+
+            if (userIDs.contains(tmp.getId())) {
+                resultUsers.add(tmp);
+            }
+        }
+
+        return resultUsers;
+
     }
 
 }
