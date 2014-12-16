@@ -17,6 +17,8 @@ public interface RatingDaoLocal {
     Integer getRatingsForHost(User host);
 
     boolean checkIfUserDidNotRateThisConference(Long userID, Long conferenceID);
+    
+    public boolean checkIfHostUserIsRestricted(User host);
 
     
     

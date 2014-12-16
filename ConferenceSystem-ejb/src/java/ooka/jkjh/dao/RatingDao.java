@@ -35,6 +35,7 @@ public class RatingDao implements RatingDaoLocal {
         ConferenceRating conferenceRating = new ConferenceRating(conferenceID, userID);
 
         conferenceRating.setId(Long.valueOf(id));
+        conferenceRating.setUserId(userID);
         ratings.put(id, conferenceRating);
 
         id++;
@@ -64,6 +65,7 @@ public class RatingDao implements RatingDaoLocal {
     @Override
     public Integer getRatingsForHost(User host) {
         Iterator it = ratings.entrySet().iterator();
+        Integer ratingSum = 0;
 
         while (it.hasNext()) {
 
@@ -72,11 +74,11 @@ public class RatingDao implements RatingDaoLocal {
 
             if (tmp.getUserId().equals(host.getId())) {
 
-                return tmp.getRatingValue();
+                ratingSum += tmp.getRatingValue();
             }
         }
 
-        return -1;
+        return ratingSum;
     }
 
     @Override
@@ -86,6 +88,36 @@ public class RatingDao implements RatingDaoLocal {
             return conferenceRating.checkIfUserCanStillRateTheConference(userID, conferenceID);
         }
         return false;
+    }
+
+    @Override
+    public boolean checkIfHostUserIsRestricted(User host) {
+        Iterator it = ratings.entrySet().iterator();
+        int ratingSum = 0;
+        int ratedConferncesSum = 0;
+
+        while (it.hasNext()) {
+
+            HashMap.Entry pairs = (HashMap.Entry) it.next();
+            ConferenceRating tmp = (ConferenceRating) pairs.getValue();
+
+            if (tmp.getUserId().equals(host.getId())) {
+
+                ratingSum += tmp.getRatingValue().intValue();
+                ratedConferncesSum++;
+            }
+        }
+
+        if (ratedConferncesSum > 0) {
+            if (((float)ratingSum / (float)ratedConferncesSum) < 5) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
     }
 
 }

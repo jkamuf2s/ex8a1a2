@@ -25,7 +25,7 @@
         <p></p>
         <h:outputLabel value="You are currently registered for the following Conferences:" rendered="#{userController.userRole == 'Participant'}"> </h:outputLabel><br/>
         <h:outputLabel value="Not registered at any Conferences so far!" rendered="#{userController.userRole == 'Participant' and empty conferenceController.showRegisteredConferencesOfUser()}"> </h:outputLabel>
-        <p:dataTable value="#{conferenceController.showRegisteredConferencesOfUser()}" rendered="#{userController.userRole == 'Participant' and not empty conferenceController.showRegisteredConferencesOfUser()}" var="item" >
+        <p:dataTable value="#{conferenceController.showRegisteredConferencesOfUser()}" rendered="#{userController.userRole == 'Participant' and not empty conferenceController.showRegisteredConferencesOfUser()}" var="conference" >
 
             <p:column>
 
@@ -35,7 +35,7 @@
 
                 </f:facet>
 
-                <h:outputText value="#{item.name}"/>
+                <h:outputText value="#{conference.name}"/>
 
             </p:column>
 
@@ -47,9 +47,23 @@
 
                 </f:facet>
 
-                <h:outputText value="#{item.id}"/>
+                <h:outputText value="#{conference.id}"/>
 
             </p:column>
+
+            <p:column>
+
+                <f:facet name="header">
+
+                    <h:outputText value="Closed?" />
+
+                </f:facet>
+
+                <h:outputText value="#{conference.completed}"/>
+
+            </p:column>
+
+
 
         </p:dataTable>
         <h:outputLabel value="You are currently the Host of the following Conferences:" rendered="#{userController.userRole == 'Host'}"> </h:outputLabel><br/>

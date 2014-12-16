@@ -8,6 +8,7 @@
     </h:head>
     <h:body>
        <h3> Create a new Conference </h3>
+       <h3> Based on your ratings your are <h:outputLabel class="errorMessage" value='#{ratingController.checkIfHostIsRestricted()}'> </h:outputLabel> </h3>
        <h:form acceptcharset="ISO-8859-1">
             <h:outputLabel value="Enter Conference Name: "> </h:outputLabel>
             <h:inputText value="#{conferenceController.conferenceName}"></h:inputText>

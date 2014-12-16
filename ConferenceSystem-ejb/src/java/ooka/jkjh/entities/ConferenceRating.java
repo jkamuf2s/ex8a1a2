@@ -29,6 +29,12 @@ public class ConferenceRating implements Serializable {
         this.conferenceId = conferenceId;
     }
 
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    
+    
     public boolean submitRatingForUser(Long userId, Long conferenceID, Integer rating) {
 
         if (!userIdsWhoSubmittedRating.contains(userId) && conferenceId.equals(conferenceID)) {

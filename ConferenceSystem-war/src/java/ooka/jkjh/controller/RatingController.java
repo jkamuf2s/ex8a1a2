@@ -20,8 +20,8 @@ public class RatingController {
 
     private boolean conferencesToRateAvaliabe = true;
     private User loggedInUser;
-  private int ratingValue;
-  
+    private int ratingValue;
+
     public boolean isConferencesToRateAvaliabe() {
         return conferencesToRateAvaliabe;
     }
@@ -39,9 +39,6 @@ public class RatingController {
         this.ratingValue = ratingValue;
     }
 
-    
-    
-    
     public void doSetCurrentUser(User user) {
         this.loggedInUser = user;
     }
@@ -60,6 +57,16 @@ public class RatingController {
         conferencesToRateAvaliabe = true;
         return confernceDao.getAllConferencesWhichUserCanRate(loggedInUser);
 
+    }
+
+    public String checkIfHostIsRestricted() {
+        boolean restricted = ratingDao.checkIfHostUserIsRestricted(loggedInUser);
+
+        if (restricted) {
+            return "Restricted";
+        } else {
+            return "Unrestricted";
+        }
     }
 
 }
