@@ -30,6 +30,10 @@ public class RatingController {
     @EJB
     private ConferenceDaoLocal confernceDao;
 
+    public void doSetCurrentUser(User user) {
+        this.loggedInUser = user;
+    }
+
     public String doGetRateConference() {
         return Pages.RATE_A_CONFERENCE;
     }

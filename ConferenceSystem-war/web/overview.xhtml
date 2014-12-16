@@ -6,6 +6,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>User Action Overview</title>
+        #{conferenceController.doSetCurrentUser(userController.user)}
+        #{ratingController.doSetCurrentUser(userController.user)}
     </h:head>
     <h:body>
         <h4>
