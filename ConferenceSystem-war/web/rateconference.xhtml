@@ -15,7 +15,7 @@
 
         <h:form>
 
-            <p:dataTable value="#{ratingController.renderAllClosedAndNotRatedByUserConferences}" var="conference" rendered="#{ not empty ratingController.renderAllClosedAndNotRatedByUserConferences()}">
+            <p:dataTable value="#{ratingController.renderAllClosedAndNotRatedByUserConferences()}" var="conference" rendered="#{ not empty ratingController.renderAllClosedAndNotRatedByUserConferences()}">
 
                 <p:column>
 

@@ -168,7 +168,7 @@ public class ConferenceDao implements ConferenceDaoLocal {
             HashMap.Entry pairs = (HashMap.Entry) it.next();
             Conference tmp = (Conference) pairs.getValue();
 
-            if (!tmp.getParticipantIds().contains(user.getId()) && tmp.isCompleted()) {
+            if (tmp.getParticipantIds().contains(user.getId()) && tmp.isCompleted()) {
                 allConferencesWhichUserCanRate.add(tmp);
             }
         }
