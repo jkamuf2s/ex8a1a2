@@ -103,7 +103,7 @@ public class ConferenceController {
 
     public List<User> showParticipantsOfConference(Long conferenceId) {
 
-        return conferenceDao.getParticipantsOfOpenConference(conferenceId);
+        return conferenceDao.getParticipantsOfConference(conferenceId);
 
     }
 
