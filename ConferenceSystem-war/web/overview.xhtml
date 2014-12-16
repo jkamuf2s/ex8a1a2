@@ -17,7 +17,8 @@
         With your role, your are capable of the following actions:
         <h:form>
             <h:commandLink value="Create a new Conference" action="#{conferenceController.doCreateNewConference()}" rendered="#{userController.userRole == 'Host'}"/>
-            <h:commandLink value="Register at a Conference" action="#{conferenceController.doRegisterAtConference()}" rendered="#{userController.userRole == 'Participant'}"/>
+            <h:commandLink value="Register at a Conference" action="#{conferenceController.doRegisterAtConference()}" rendered="#{userController.userRole == 'Participant'}"/><br/>
+            <h:commandLink value="Rate Closed Conferences where you attendet" action="#{ratingController.doGetRateConference()}" rendered="#{userController.userRole == 'Participant'}"/>
         </h:form>
         <p></p>
         <h:outputLabel value="You are currently registered for the following Conferences:" rendered="#{userController.userRole == 'Participant'}"> </h:outputLabel><br/>

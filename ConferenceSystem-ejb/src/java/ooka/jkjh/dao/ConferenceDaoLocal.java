@@ -26,5 +26,7 @@ public interface ConferenceDaoLocal {
     List<Conference> getConferencesWhereParticipantNotRegistered(User user);
     
     List<User> getParticipantsOfOpenConference(Long conferenceID);
+    
+    public List<Conference> getAllConferencesWhichUserCanRate(User user);
 
 }

@@ -159,4 +159,21 @@ public class ConferenceDao implements ConferenceDaoLocal {
 
     }
 
+    @Override
+    public List<Conference> getAllConferencesWhichUserCanRate(User user) {
+        Iterator it = conferences.entrySet().iterator();
+        List<Conference> allConferencesWhichUserCanRate = new LinkedList();
+        while (it.hasNext()) {
+
+            HashMap.Entry pairs = (HashMap.Entry) it.next();
+            Conference tmp = (Conference) pairs.getValue();
+
+            if (!tmp.getParticipantIds().contains(user.getId()) && tmp.isCompleted()) {
+                allConferencesWhichUserCanRate.add(tmp);
+            }
+        }
+
+        return allConferencesWhichUserCanRate;
+    }
+
 }
