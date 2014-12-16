@@ -29,6 +29,6 @@ public interface ConferenceDaoLocal {
     
     public List<Conference> getAllConferencesWhichUserCanRate(User user);
 
-    public boolean closeCOnference(Long conferenceID);
+    public boolean closeCOnference(Long conferenceID, Long userWhoClosedTheConference);
 
 }

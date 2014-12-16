@@ -22,6 +22,9 @@ public class ConferenceDao implements ConferenceDaoLocal {
     @EJB
     private UserDaoLocal userDao;
 
+    @EJB
+    private RatingDaoLocal ratingDao;
+
     @Override
     public int addConference(Conference conference, User hostUser) {
 
@@ -168,7 +171,9 @@ public class ConferenceDao implements ConferenceDaoLocal {
             HashMap.Entry pairs = (HashMap.Entry) it.next();
             Conference tmp = (Conference) pairs.getValue();
 
-            if (tmp.getParticipantIds().contains(user.getId()) && tmp.isCompleted()) {
+            if (tmp.getParticipantIds().contains(user.getId()) && tmp.isCompleted()
+                    && ratingDao.checkIfUserDidNotRateThisConference(user.getId(), tmp.getId())) {
+
                 allConferencesWhichUserCanRate.add(tmp);
             }
         }
@@ -177,9 +182,9 @@ public class ConferenceDao implements ConferenceDaoLocal {
     }
 
     @Override
-    public boolean closeCOnference(Long conferenceID) {
+    public boolean closeCOnference(Long conferenceID, Long userWhoClosedTheConference) {
         Iterator it = conferences.entrySet().iterator();
-        
+
         while (it.hasNext()) {
 
             HashMap.Entry pairs = (HashMap.Entry) it.next();
@@ -187,6 +192,7 @@ public class ConferenceDao implements ConferenceDaoLocal {
 
             if (tmp.getId().equals(conferenceID)) {
                 tmp.setCompleted(true);
+                ratingDao.addClosedConferenceForRating(conferenceID, userWhoClosedTheConference);
                 return true;
             }
         }

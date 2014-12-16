@@ -16,6 +16,8 @@ public interface RatingDaoLocal {
 
     Integer getRatingsForHost(User host);
 
+    boolean checkIfUserDidNotRateThisConference(Long userID, Long conferenceID);
+
     
     
 }

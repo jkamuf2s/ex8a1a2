@@ -79,8 +79,13 @@ public class RatingDao implements RatingDaoLocal {
         return -1;
     }
 
-
-    
-    
+    @Override
+    public boolean checkIfUserDidNotRateThisConference(Long userID, Long conferenceID) {
+        ConferenceRating conferenceRating = (ConferenceRating) ratings.get(conferenceID.intValue());
+        if (conferenceRating != null) {
+            return conferenceRating.checkIfUserCanStillRateTheConference(userID, conferenceID);
+        }
+        return false;
+    }
 
 }

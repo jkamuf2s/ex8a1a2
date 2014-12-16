@@ -116,7 +116,7 @@ public class ConferenceController {
     }
 
     public String closeOpenConference(Long conferenceID) {
-        conferenceDao.closeCOnference(conferenceID);
+        conferenceDao.closeCOnference(conferenceID, loggedInUser.getId());
         return Pages.USER_ACTION_OVERVIEW;
     }
 
