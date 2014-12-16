@@ -5,6 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Sign Up</title>
+        <h:outputStylesheet library="css" name="conferenceSystem.css"  />
     </h:head>
     <h:body>
         <h3> Create an new account </h3>
@@ -25,6 +26,7 @@
                 <f:selectItem id="item4" itemLabel="Host" itemValue="Host" />
             </h:selectOneMenu>
             <p></p>
+            <h:outputLabel class="errorMessage" value="User with that Email Address does already exist!" rendered="#{userController.emailAdressAlreadyTaken == true}"> </h:outputLabel><br/>
             <h:commandButton value="Sign Up" action="#{userController.createNewUser()}"></h:commandButton>
         </h:form>
 

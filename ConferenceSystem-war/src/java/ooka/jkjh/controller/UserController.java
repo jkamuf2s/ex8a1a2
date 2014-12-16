@@ -22,9 +22,21 @@ public class UserController {
     private String password;
     private String userRole;
     private int id;
+    boolean passwordWrongWarningUserDoesNotExist = false;
+    boolean emailAdressAlreadyTaken = false;
 
     @EJB
     private UserDaoLocal userDao;
+
+    public boolean isPasswordWrongWarningUserDoesNotExist() {
+        return passwordWrongWarningUserDoesNotExist;
+    }
+
+    public boolean isEmailAdressAlreadyTaken() {
+        return emailAdressAlreadyTaken;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -34,8 +46,6 @@ public class UserController {
         this.id = id;
     }
 
-    
-    
     public String getUserRole() {
         return userRole;
     }
@@ -79,18 +89,27 @@ public class UserController {
     public String signIn() {
 
         user = this.userDao.getUserByEmailAddress(emailAddress);
-        lastName = user.getLastName();
-        firstName = user.getFirstName();
-        emailAddress = user.getEmailAddress();
-        password = user.getPassword();
-        userRole = user.getRole();
 
-        return Pages.USER_ACTION_OVERVIEW;
+        if (user == null) {
+            return wrongPassword();
+        }
+
+        if (!password.equals(user.getPassword())) {
+            return wrongPassword();
+        } else {
+
+            lastName = user.getLastName();
+            firstName = user.getFirstName();
+            userRole = user.getRole();
+            passwordWrongWarningUserDoesNotExist = false;
+            return Pages.USER_ACTION_OVERVIEW;
+        }
 
     }
 
     public String signUp() {
 
+        emailAdressAlreadyTaken = false;
         return Pages.SIGN_UP_PAGE;
     }
 
@@ -99,14 +118,31 @@ public class UserController {
         user = new User(lastName, firstName, emailAddress, password, userRole);
 
         this.id = this.userDao.addNewUser(user);
-
-        return Pages.USER_ACTION_OVERVIEW;
+        if (this.id == -1) {
+            return emailAdressAlreadyTaken();
+        } else {
+            emailAdressAlreadyTaken = false;
+            return Pages.USER_ACTION_OVERVIEW;
+        }
 
     }
-    
-    public String signOut(){
+
+    public String signOut() {
         user = null;
         return Pages.INDEX_PAGE;
+    }
+
+    public String wrongPassword() {
+        user = null;
+        passwordWrongWarningUserDoesNotExist = true;
+        return Pages.INDEX_PAGE;
+    }
+
+    public String emailAdressAlreadyTaken() {
+        user = null;
+        emailAdressAlreadyTaken = true;
+        return Pages.SIGN_UP_PAGE;
+
     }
 
 }
