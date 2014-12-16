@@ -82,6 +82,20 @@
 
                 <f:facet name="header">
 
+                    <h:outputText value="Closed?" />
+
+                </f:facet>
+
+                <h:outputText value="#{conference.completed}"/>
+                <h:form>
+                    <h:commandButton value="Close the Conference" action="#{conferenceController.closeOpenConference(conference.id)}" rendered="#{conference.completed == false}"></h:commandButton><br/>
+                </h:form>
+            </p:column>
+
+            <p:column>
+
+                <f:facet name="header">
+
                     <h:outputText value="Paricipants" />
 
                 </f:facet>

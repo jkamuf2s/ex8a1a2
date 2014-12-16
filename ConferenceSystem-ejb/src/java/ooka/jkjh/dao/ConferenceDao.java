@@ -176,4 +176,22 @@ public class ConferenceDao implements ConferenceDaoLocal {
         return allConferencesWhichUserCanRate;
     }
 
+    @Override
+    public boolean closeCOnference(Long conferenceID) {
+        Iterator it = conferences.entrySet().iterator();
+        
+        while (it.hasNext()) {
+
+            HashMap.Entry pairs = (HashMap.Entry) it.next();
+            Conference tmp = (Conference) pairs.getValue();
+
+            if (tmp.getId().equals(conferenceID)) {
+                tmp.setCompleted(true);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

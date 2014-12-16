@@ -111,5 +111,10 @@ public class ConferenceController {
         conferenceIsOpenAndDoesExist =true;
         return Pages.CREATE_CONFERENCE;
     }
+    
+    public String closeOpenConference(Long conferenceID){
+        conferenceDao.closeCOnference(conferenceID);
+        return Pages.USER_ACTION_OVERVIEW;
+    }
 
 }
